@@ -97,6 +97,36 @@ vi app/controllers/books_controller.rb
 curl https://localhost:3000/
 ```
 
+```sh
+rails g migration AddPictureToBooks picture:string
+rails g migration AddPictureToBooks picture:string
+vi db/migrate/[timestamp]_create_add_picture_to_books.rb
+rails db:migrate
+vi Gemfile
+bundle
+bin/spring stop
+rails g uploader Picture
+vi app/models/books.rb
++ mount_uploader :picture, PictureUploader
+vi app/controllers/books_controller.rb
++ params.require(:book).permit(:title, :memo, :author, :picture)
+vi app/views/books/_form.html.erb
++ <div>
++   <%= f.label :picture %><br>
++   <%= f.file_field :picture %>
++ </div>
+vi app/views/books/show.html.erb
++ <p>
++   <strong>Picture:</strong>
++   <%= image_tag(@book.picture_url) if @book.picture.present? %>
++ </p>
+vi app/views/books/index.html.erb
++ <th>Picture</th>
++ <td><%= book.picture %></td>
+curl https://localhost:3000/books
+rails s
+```
+
 ```
 rails g migration AddAuthorToBooks author:string
 rails g model book title:string memo:text
@@ -107,5 +137,10 @@ rails g scaffold book string memo:text
 ```
 rbenv install 2.4.0
 ```
+```
+vi Gemfile
+bundle
 
+rails c
+```
 
