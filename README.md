@@ -135,7 +135,15 @@ rails g scaffold book string memo:text
 
 ```
 ```
-rbenv install 2.4.0
+git clone https://github.com/rbenv/rbenv.git
+git clone https://github.com/ruby-build/ruby-build.git
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+echo 'export PATH="$HOME/.rbenv/shims:$PATH"' >> ~/.bash_profile
+source ~/.bash_profile
+rbenv install 2.7.1
+rbenv rehash
+rbenv global 2.7.1
+source ~/.bash_profile
 ```
 ```
 vi Gemfile
